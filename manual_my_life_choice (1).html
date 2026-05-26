@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual de Usuario — My Life Choice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #f7f5f0;
+      font-family: 'Nunito', sans-serif;
+      color: #2c2c2a;
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #c8f0f9 0%, #e8f7f0 50%, #fef9e7 100%);
+      border-radius: 24px;
+      padding: 2.5rem 2.5rem 2rem;
+      text-align: center;
+      margin-bottom: 1.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(245, 166, 35, 0.1);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #f5a623;
+      color: #fff;
+      font-family: 'Fredoka One', cursive;
+      font-size: 11px;
+      letter-spacing: 2px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.4rem;
+      color: #8b5e1a;
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: #5a7a6a;
+      font-weight: 600;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 1.75rem;
+      justify-content: center;
+    }
+
+    .nav-btn {
+      background: #fff;
+      border: 1.5px solid #d3d1c7;
+      border-radius: 30px;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      color: #5f5e5a;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      background: #f5a623;
+      border-color: #f5a623;
+      color: #fff;
+    }
+
+    .nav-btn i {
+      font-size: 15px;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.visible {
+      display: block;
+    }
+
+    .sec-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      color: #8b5e1a;
+      margin-bottom: 4px;
+    }
+
+    .sec-sub {
+      font-size: 14px;
+      color: #888780;
+      margin-bottom: 1.25rem;
+      font-weight: 600;
+    }
+
+    .img-placeholder {
+      width: 100%;
+      height: 300px;
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .img-placeholder img {
+      width: 80%;
+      height: 300px;
+      object-fit: contain;
+      border-radius: 14px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .step {
+      display: flex;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid #e8e6e0;
+      margin-bottom: 12px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+
+    .step:hover {
+      border-color: #f5a623;
+    }
+
+    .step-num {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      border-radius: 50%;
+      background: #fef3d0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fredoka One', cursive;
+      font-size: 18px;
+      color: #c47a00;
+    }
+
+    .step-icon {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      border-radius: 50%;
+      background: #f7f5f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888780;
+    }
+
+    .step-icon i {
+      font-size: 20px;
+    }
+
+    .step-body h3 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 5px;
+      color: #2c2c2a;
+    }
+
+    .step-body p {
+      font-size: 14px;
+      color: #5f5e5a;
+      line-height: 1.65;
+    }
+
+    .tip {
+      margin-top: 9px;
+      background: #f0faf5;
+      border-left: 3px solid #3ab87a;
+      border-radius: 0 8px 8px 0;
+      padding: 7px 12px;
+      font-size: 13px;
+      color: #2a7a52;
+      font-weight: 600;
+    }
+
+    .pill {
+      display: inline-block;
+      background: #fff3cd;
+      color: #8b5e1a;
+      border-radius: 8px;
+      padding: 1px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      margin: 0 2px;
+    }
+
+    .pill.green {
+      background: #d4f7e5;
+      color: #1a6b40;
+    }
+
+    .pill.blue {
+      background: #d0eaf8;
+      color: #1a4a6b;
+    }
+
+    .info-box {
+      background: #f0f9ff;
+      border: 1px solid #b3d9f5;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .info-box .bh {
+      font-size: 13px;
+      font-weight: 800;
+      color: #185fa5;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .info-box .bh i {
+      font-size: 16px;
+    }
+
+    .info-box p {
+      font-size: 14px;
+      color: #2a5a7a;
+      line-height: 1.6;
+    }
+
+    .warn-box {
+      background: #fff8e6;
+      border: 1px solid #f5cc6a;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .warn-box .bh {
+      font-size: 13px;
+      font-weight: 800;
+      color: #c47a00;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .warn-box .bh i {
+      font-size: 16px;
+    }
+
+    .warn-box p {
+      font-size: 14px;
+      color: #7a5400;
+      line-height: 1.6;
+    }
+
+    .career-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .career-card {
+      background: #f7f5f0;
+      border: 1px solid #e8e6e0;
+      border-radius: 14px;
+      padding: 14px 10px;
+      text-align: center;
+    }
+
+    .career-card i {
+      font-size: 26px;
+      color: #888780;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .career-card .cn {
+      font-size: 12px;
+      font-weight: 800;
+      color: #2c2c2a;
+      line-height: 1.3;
+    }
+
+    .career-card .ct {
+      font-size: 11px;
+      color: #888780;
+      margin-top: 3px;
+    }
+
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin: 14px 0;
+    }
+
+    .flow-step {
+      background: #f7f5f0;
+      border: 1px solid #e8e6e0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #2c2c2a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .flow-step i {
+      font-size: 16px;
+      color: #888780;
+    }
+
+    .kbd {
+      display: inline-block;
+      background: #f7f5f0;
+      border: 1.5px solid #b4b2a9;
+      border-radius: 5px;
+      padding: 1px 8px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: monospace;
+      color: #2c2c2a;
+      margin: 0 2px;
+    }
+
+    .faq-item {
+      border: 1px solid #e8e6e0;
+      border-radius: 14px;
+      margin-bottom: 9px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #2c2c2a;
+      background: #fff;
+      transition: background 0.2s;
+    }
+
+    .faq-q:hover {
+      background: #fffbf0;
+    }
+
+    .faq-a {
+      display: none;
+      padding: 0 16px 14px;
+      font-size: 14px;
+      color: #5f5e5a;
+      line-height: 1.65;
+      background: #fff;
+    }
+
+    .faq-a.open {
+      display: block;
+    }
+
+    .faq-arrow {
+      transition: transform 0.2s;
+      color: #888780;
+      font-size: 16px;
+    }
+
+    .faq-arrow.open {
+      transform: rotate(180deg);
+    }
+
+    .section-label {
+      font-size: 14px;
+      font-weight: 800;
+      color: #2c2c2a;
+      margin: 1.25rem 0 0.75rem;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e8e6e0;
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: #888780;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="hero">
+      <div class="hero-badge">Manual de usuario</div>
+      <h1>My Life Choice</h1>
+      <p>Guía completa para descubrir tu carrera ideal</p>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn active" onclick="show('inicio',this)"><i class="ti ti-rocket"></i>Primeros pasos</button>
+      <button class="nav-btn" onclick="show('mundo',this)"><i class="ti ti-map"></i>El mundo</button>
+      <button class="nav-btn" onclick="show('juegos',this)"><i class="ti ti-device-gamepad-2"></i>Los juegos</button>
+      <button class="nav-btn" onclick="show('resultados',this)"><i class="ti ti-trophy"></i>Resultados</button>
+      <button class="nav-btn" onclick="show('config',this)"><i class="ti ti-settings"></i>Configuración</button>
+    </div>
+
+    <!-- PRIMEROS PASOS -->
+    <div class="section visible" id="s-inicio">
+      <p class="sec-title">Primeros pasos</p>
+      <p class="sec-sub">Sigue esta guía para comenzar a explorar carreras en menos de tres minutos.</p>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Inicia el juego</h3>
+          <p>Al abrir My Life Choice aparecerá la pantalla principal. Selecciona <span class="pill">Empezar Nueva
+              Aventura</span> para comenzar desde cero, o <span class="pill">Continuar Partida</span> si ya tienes una
+            sesión previa.</p>
+          <div class="tip">Si ingresas por primera vez, selecciona siempre "Empezar Nueva Aventura".</div>
+        </div>
+      </div>
+      <div class="img-placeholder"><img src="home.png" alt="Pantalla de inicio del juego"></div>
+
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Crea tu cuenta (opcional)</h3>
+          <p>Puedes registrarte con tu correo electrónico o con una cuenta de Google. Si prefieres no hacerlo en este
+            momento, solo empieza una nueva partida, y en la introducción elige <span class="pill">Continuar como
+              invitado</span>.</p>
+          <div class="tip">Registrarse permite guardar el progreso automáticamente y retomarlo desde cualquier
+            dispositivo.</div>
+        </div>
+      </div>
+
+      <div class="img-placeholder"><img src="login.png" alt="Pantalla de login"></div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Elige a tu guía</h3>
+          <p>Tres personajes acompañarán la aventura: <strong>Lili</strong>, <strong>Nick</strong> o
+            <strong>Andrew</strong>. Selecciona el que prefieras. Estos explicarán el funcionamiento del juego.</p>
+        </div>
+      </div>
+      <div class="img-placeholder"><img src="guia.png" alt="Pantalla de selección de guía"></div>
+
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Ingresa tu nombre</h3>
+          <p>El guía solicitará tu nombre. Escríbelo en el campo de texto y presiona la flecha <span
+              class="pill">▶</span> para continuar. El juego utilizará ese nombre durante toda la aventura.</p>
+        </div>
+      </div>
+      <div class="img-placeholder"><img src="nombre.png" alt="Pantalla de field nombre"></div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Selecciona tu personaje</h3>
+          <p>Elige la apariencia de tu avatar: <span class="pill green">Femenino</span>, <span
+              class="pill blue">Masculino</span> o <span class="pill">No binario</span>. Esta selección determina cómo
+            se verá tu personaje dentro del mundo.</p>
+        </div>
+      </div>
+      <div class="img-placeholder"><img src="player.png" alt="Pantalla de selección de personaje"></div>
+
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h3>Lee las instrucciones iniciales</h3>
+          <p>Los guías te explicarán como jugar, adicionalmente puedes dar clic en el ícono<span class="pill">?</span>
+            para consultar las indicaciones básicas.</p>
+        </div>
+      </div>
+      <div class="img-placeholder"><img src="help.png" alt="Pantalla de ayuda"></div>
+
+    </div>
+
+    <div class="section" id="s-mundo">
+      <p class="sec-title">Explorando el mundo</p>
+      <p class="sec-sub">Navega libremente y descubre las carreras disponibles.</p>
+
+
+      <div class="info-box">
+        <div class="bh"><i class="ti ti-keyboard"></i>Desplazamiento</div>
+        <p>Utiliza las teclas <span class="kbd">W</span><span class="kbd">A</span><span class="kbd">S</span><span
+            class="kbd">D</span> o las flechas del teclado para mover el personaje por el mundo. Cada tecla corresponde
+          a una dirección.</p>
+      </div>
+            <div class="img-placeholder"><img src="mundo.png" alt="Vista general del mundo del juego"></div>
+
+
+      <div class="step">
+        <div class="step-icon"><i class="ti ti-building"></i></div>
+        <div class="step-body">
+          <h3>Las casas representan carreras</h3>
+          <p>Cada casa del mundo corresponde a una carrera profesional. Verás el nombre de la carrera
+            en un letrero al lado de cada una. Hay más de diez carreras disponibles para explorar.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-icon"><i class="ti ti-door-enter"></i></div>
+        <div class="step-body">
+          <h3>Ingresa a una carrera</h3>
+          <p>Al darle clic a una casa aparecerá un mensaje de confirmación. Haz clic en <span
+              class="pill green">Sí</span> para entrar, o en <span class="pill">No</span> si deseas seguir explorando el
+            mundo antes.</p>
+        </div>
+      </div>
+    
+
+                 <div class="img-placeholder"><img src="decision.png" alt="Vista general del mundo del juego"></div>
+
+
+      <div class="step">
+        <div class="step-icon"><i class="ti ti-message-circle"></i></div>
+        <div class="step-body">
+          <h3>Interactúa con los personajes del mundo</h3>
+          <p>Dentro del mundo encontrarás personajes secundarios (NPCs). Al acercarte,
+            podrán invitarte a explorar su carrera. Selecciona <span
+              class="pill green">Sí</span> o <span class="pill">No</span> según tu interés.</p>
+         
+        </div>
+      </div>
+                       <div class="img-placeholder"><img src="decisionNPC.png" alt="Vista general del mundo del juego"></div>
+
+      
+
+      <div class="warn-box">
+        <div class="bh"><i class="ti ti-arrow-left"></i>Cómo regresar al mundo</div>
+        <p>En cualquier pantalla encontrarás el botón <strong>← Volver</strong> en la esquina superior izquierda. Haz
+          clic en él para salir de la carrera actual y continuar explorando otras.</p>
+      </div>
+    </div>
+
+    <div class="section" id="s-juegos">
+      <p class="sec-title">Los juegos por carrera</p>
+      <p class="sec-sub">Cada carrera incluye un mini-juego que simula situaciones reales del área.</p>
+
+
+
+
+      <div class="step">
+        <div class="step-icon"><i class="ti ti-user-circle"></i></div>
+        <div class="step-body">
+          <h3>Conoce al profesional</h3>
+          <p>Al ingresar a una carrera, un personaje del área te saludará y describirá su trabajo. Lee el diálogo con
+            atención y haz clic en la flecha <span class="pill">▶</span> para avanzar.</p>
+        </div>
+      </div>
+            <div class="img-placeholder"><img src="dialogo.png" alt="Diálogo con un personaje del mundo"></div>
+
+
+      <div class="step">
+        <div class="step-icon"><i class="ti ti-puzzle"></i></div>
+        <div class="step-body">
+          <h3>Completa el desafío</h3>
+          <p>Cada carrera presenta un reto diferente. Según el área, el juego puede solicitarte: <span
+              class="pill">Seleccionar opciones</span> <span class="pill green">Arrastrar y soltar</span> <span
+              class="pill blue">Ordenar pasos</span> <span class="pill">Clasificar situaciones</span></p>
+        </div>
+      </div>
+
+
+      <div class="img-placeholder"><img src="game1.png"
+          alt="Pantalla de celebración y calificación con estrellas"></div>
+
+      <div class="step">
+        <div class="step-icon"><i class="ti ti-medal"></i></div>
+        <div class="step-body">
+          <h3>Finaliza el reto</h3>
+          <p>Al completar el juego aparecerá una pantalla de confirmación. Haz clic en <span
+              class="pill green">Continuar</span> para avanzar.</p>
+        </div>
+      </div>
+      <div class="img-placeholder"><img src="congrats.png"
+          alt="Pantalla de celebración y calificación con estrellas"></div>
+
+      <div class="step">
+        <div class="step-icon"><i class="ti ti-star"></i></div>
+        <div class="step-body">
+          <h3>Califica la carrera</h3>
+          <p>El juego te pedirá que evalúes del 1 al 5 qué tanto te gustó la carrera explorada. Esta valoración es un
+            componente del perfil vocacional que se construye al final. No hay respuesta correcta ni incorrecta.</p>
+        </div>
+      </div>
+       <div class="img-placeholder"><img src="feedback.png"
+          alt="Pantalla de celebración y calificación con estrellas"></div>
+    </div>
+
+    <!-- RESULTADOS -->
+    <div class="section" id="s-resultados">
+      <p class="sec-title">Tus resultados</p>
+      <p class="sec-sub">Al finalizar, el sistema muestra las carreras más afines a tu perfil.</p>
+
+     
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Tu Top 5 de carreras</h3>
+          <p>Al finalizar la exploración, la aplicación presenta un resumen con las cinco carreras o áreas de interés más afines a las respuestas del usuario.</p>
+        </div>
+      </div>
+       <div class="img-placeholder"><img src="summary.png" alt="Pantalla de resumen con el Top 5 de carreras">
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Detalle de cada carrera</h3>
+          <p>Haz clic en cada carrera para acceder a información
+            adicional en la Universidad del Valle.</p>
+        </div>
+      </div>
+
+      <div class="img-placeholder"><img src="more.png"
+          alt="Vista del botón Descargar Reporte y ejemplo del PDF"></div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Descarga tu reporte</h3>
+          <p>Selecciona el botón <span class="pill">Descargar Reporte</span> para guardar un archivo PDF con los
+            resultados completos. 
+          </p>
+          <div class="tip">El reporte incluye todas las carreras recomendadas con su puntaje y vínculos para ampliar la
+            información.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONFIGURACIÓN -->
+    <div class="section" id="s-config">
+      <p class="sec-title">Configuración y ajustes</p>
+      <p class="sec-sub">Personaliza la experiencia desde cualquier pantalla del juego.</p>
+
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Acceder a la configuración</h3>
+          <p>En cualquier pantalla encontrarás el ícono de engranaje <span class="pill">⚙</span> en la esquina superior
+            derecha. Haz clic sobre él para abrir el panel de ajustes.</p>
+        </div>
+      </div>
+            <div class="img-placeholder"><img src="settings.png" alt="Panel de configuración abierto"></div>
+
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Música de fondo</h3>
+          <p>Utiliza el interruptor junto a "Música de fondo" para activarla o desactivarla. El deslizador adyacente
+            permite ajustar el nivel de volumen.</p>
+        </div>
+      </div>
+            <div class="img-placeholder"><img src="settings_modal.png" alt="Panel de configuración abierto"></div>
+
+
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Cerrar sesión</h3>
+          <p>Si iniciaste sesión con una cuenta, el botón <span class="pill">Cerrar Sesión</span> estará disponible en
+            la pantalla principal. Al cerrar sesión, el progreso permanece guardado siempre y cuando hayas iniciado sesión.</p>
+        </div>
+      </div>
+    </div>
+
+  
+
+    <div class="footer">
+      <p>My Life Choice — Manual de usuario &nbsp;·&nbsp; </p>
+    </div>
+  </div>
+
+  <script>
+    function show(id, btn) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('s-' + id).classList.add('visible');
+      btn.classList.add('active');
+    }
+    function toggleFaq(el) {
+      const a = el.nextElementSibling;
+      const arr = el.querySelector('.faq-arrow');
+      a.classList.toggle('open');
+      arr.classList.toggle('open');
+    }
+  </script>
+</body>
+
+</html>
